@@ -1,0 +1,25 @@
+// CBD model of the cbd block
+// Created with CBD.converters.CBDDraw
+digraph model {
+ splines=ortho;
+ label=<<B>cbd (EvenNumberGen)</B>>;
+ labelloc="t";
+ fontsize=20;
+ rankdir="LR";
+ node_2356437880992 [label="TimeBlock\n(time)", shape=box];
+ inter_2356437880992_OUT1 [shape=point, width=0.01, height=0.01];
+ node_2356437880992 -> inter_2356437880992_OUT1 [taillabel="OUT1", arrowtail="oinv", arrowhead="none", dir=both];
+ inter_2356437880992_relative [shape=point, width=0.01, height=0.01];
+ node_2356437880992 -> inter_2356437880992_relative [taillabel="relative", arrowtail="oinv", arrowhead="none", dir=both];
+ node_2356437881280 [label=" ConstantBlock\n(double.two)\n2", shape=ellipse];
+ inter_2356437881280_OUT1 [shape=point, width=0.01, height=0.01];
+ node_2356437881280 -> inter_2356437881280_OUT1 [taillabel="OUT1", arrowtail="oinv", arrowhead="none", dir=both];
+ node_2356437881472 [label="ProductBlock\n(double.mult)", shape=box];
+ inter_2356437881280_OUT1 -> node_2356437881472 [headlabel="IN1", arrowhead="normal", arrowtail="none", dir=both];
+ inter_2356437880992_OUT1 -> node_2356437881472 [headlabel="IN2", arrowhead="normal", arrowtail="none", dir=both];
+ inter_2356437881472_OUT1 [shape=point, width=0.01, height=0.01];
+ node_2356437881472 -> inter_2356437881472_OUT1 [taillabel="OUT1", arrowtail="oinv", arrowhead="none", dir=both];
+ node_2356437880944_OUT1 [shape=point, width=0.01, height=0.01];
+ inter_2356437881472_OUT1 -> node_2356437880944_OUT1 [headlabel="OUT1", arrowhead="onormal", arrowtail="none", dir=both];
+
+}
