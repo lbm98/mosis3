@@ -25,15 +25,45 @@ class SinGen(CBD):
         self.addConnection("sin", "OUT1", output_port_name='OUT1')
 
 
-sinGen = SinGen("SinGen")
-sim = Simulator(sinGen)
+oldModel = SinGen("SinGen")
+#sim = Simulator(sinGen)
 
-sim.setDeltaT(0.1)
-# The termination time can be set as argument to the run call
+from CBD.preprocessing.butcher import ButcherTableau as BT
+from CBD.preprocessing.rungekutta import RKPreprocessor
+
+oldModel.addFixedRateClock("clock", 1e-4)
+
+tableau = BT.RKF45()
+RKP = RKPreprocessor(tableau, atol=2e-5, hmin=0.1, safety=.84)
+newModel = RKP.preprocess(oldModel)
+
+sim = Simulator(newModel)
+
 sim.run(20.0)
-
-data = sinGen.getSignalHistory('OUT1')
+data = newModel.getSignalHistory('OUT1')
 x, y = [x for x, _ in data], [y for _, y in data]
-
 plt.plot(x, y)
 plt.show()
+
+
+
+
+
+# from CBD.converters.latexify import CBD2Latex
+# cbd2latex = CBD2Latex(model, show_steps=True, render_latex=False)
+# cbd2latex.simplify()
+# print("RESULT IS:")
+# print(cbd2latex.render())
+
+
+
+
+# sim.setDeltaT(0.1)
+# # The termination time can be set as argument to the run call
+# sim.run(20.0)
+#
+# data = model.getSignalHistory('OUT1')
+# x, y = [x for x, _ in data], [y for _, y in data]
+#
+# plt.plot(x, y)
+# plt.show()

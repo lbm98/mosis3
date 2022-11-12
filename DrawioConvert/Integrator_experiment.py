@@ -1,25 +1,27 @@
-#!/usr/bin/python3
-# This file was automatically generated from drawio2cbd with the command:
-#   __main__.py -F CBD -e Integrator -sSrgv Integrator.drawio -E delta=0.1
-
-from Integrator import *
+from CBD.preprocessing.butcher import ButcherTableau as BT
+from CBD.preprocessing.rungekutta import RKPreprocessor
 from CBD.simulator import Simulator
 import matplotlib.pyplot as plt
+from Integrator import *
 
-DELTA_T = 0.1
+oldModel = OscillatorWithIntegrators("OscillatorWithIntegrators")
 
-cbd = Integrator("Integrator")
+oldModel.addFixedRateClock("clock",0.1)
 
-# Run the Simulation
-sim = Simulator(cbd)
-sim.setDeltaT(DELTA_T)
-sim.run(50)
+tableau = BT.RKF45()
+RKP = RKPreprocessor(tableau, atol=2e-5, hmin=0.1, safety=.84)
+newModel = RKP.preprocess(oldModel)
 
-# TODO: Process Your Simulation Results
 
-if __name__ == "__main__":
-    data = cbd.getSignalHistory('OUT1')
-    x, y = [x for x, _ in data], [y for _, y in data]
+# newModel.flatten()
+# from CBD.converters.CBDDraw import gvDraw
+# gvDraw(newModel, "rkf45-flatten.gv")
 
-    plt.plot(x, y)
-    plt.show()
+sim = Simulator(newModel)
+sim.run(10.0)
+data = newModel.getSignalHistory('OUT1')
+x, y = [x for x, _ in data], [y for _, y in data]
+plt.plot(x, y)
+plt.plot(x, y, 'ro')
+plt.show()
+print(len(x))

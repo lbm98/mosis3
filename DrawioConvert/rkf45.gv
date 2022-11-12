@@ -1,0 +1,41 @@
+// CBD model of the OscillatorWithIntegrators block
+// Created with CBD.converters.CBDDraw
+digraph model {
+ splines=ortho;
+ label=<<B>OscillatorWithIntegrators (CBD)</B>>;
+ labelloc="t";
+ fontsize=20;
+ rankdir="LR";
+ node_1666864789584 [label="CBD\n(RK)", shape=Msquare];
+ inter_1666865170944_OUT1 -> node_1666864789584 [headlabel="h", arrowhead="normal", arrowtail="none", dir=both];
+ inter_1666865195136_time -> node_1666864789584 [headlabel="time", arrowhead="normal", arrowtail="none", dir=both];
+ inter_1666865195136_rel_time -> node_1666864789584 [headlabel="rel_time", arrowhead="normal", arrowtail="none", dir=both];
+ inter_1666865170272_OUT1 -> node_1666864789584 [headlabel="IC1", arrowhead="normal", arrowtail="none", dir=both];
+ inter_1666865171952_OUT1 -> node_1666864789584 [headlabel="IC2", arrowhead="normal", arrowtail="none", dir=both];
+ inter_1666864789584_OUT1 [shape=point, width=0.01, height=0.01];
+ node_1666864789584 -> inter_1666864789584_OUT1 [taillabel="OUT1", arrowtail="oinv", arrowhead="none", dir=both];
+ inter_1666864789584_OUT2 [shape=point, width=0.01, height=0.01];
+ node_1666864789584 -> inter_1666864789584_OUT2 [taillabel="OUT2", arrowtail="oinv", arrowhead="none", dir=both];
+ inter_1666864789584_h_new [shape=point, width=0.01, height=0.01];
+ node_1666864789584 -> inter_1666864789584_h_new [taillabel="h_new", arrowtail="oinv", arrowhead="none", dir=both];
+ node_1666865195136 [label="Clock\n(clock)", shape=Msquare];
+ inter_1666865170944_OUT1 -> node_1666865195136 [headlabel="h", arrowhead="normal", arrowtail="none", dir=both];
+ inter_1666865195136_time [shape=point, width=0.01, height=0.01];
+ node_1666865195136 -> inter_1666865195136_time [taillabel="time", arrowtail="oinv", arrowhead="none", dir=both];
+ inter_1666865195136_rel_time [shape=point, width=0.01, height=0.01];
+ node_1666865195136 -> inter_1666865195136_rel_time [taillabel="rel_time", arrowtail="oinv", arrowhead="none", dir=both];
+ inter_1666865195136_delta [shape=point, width=0.01, height=0.01];
+ node_1666865195136 -> inter_1666865195136_delta [taillabel="delta", arrowtail="oinv", arrowhead="none", dir=both];
+ node_1666865170944 [label=" ConstantBlock\n(clock-delta)\n0.01", shape=ellipse];
+ inter_1666865170944_OUT1 [shape=point, width=0.01, height=0.01];
+ node_1666865170944 -> inter_1666865170944_OUT1 [taillabel="OUT1", arrowtail="oinv", arrowhead="none", dir=both];
+ node_1666865170272 [label=" ConstantBlock\n(v0)\n1", shape=ellipse];
+ inter_1666865170272_OUT1 [shape=point, width=0.01, height=0.01];
+ node_1666865170272 -> inter_1666865170272_OUT1 [taillabel="OUT1", arrowtail="oinv", arrowhead="none", dir=both];
+ node_1666865171952 [label=" ConstantBlock\n(x0)\n0", shape=ellipse];
+ inter_1666865171952_OUT1 [shape=point, width=0.01, height=0.01];
+ node_1666865171952 -> inter_1666865171952_OUT1 [taillabel="OUT1", arrowtail="oinv", arrowhead="none", dir=both];
+ node_1666864789200_OUT1 [shape=point, width=0.01, height=0.01];
+ inter_1666864789584_OUT2 -> node_1666864789200_OUT1 [headlabel="OUT1", arrowhead="onormal", arrowtail="none", dir=both];
+
+}

@@ -5,7 +5,7 @@
 from CBD.Core import *
 from CBD.lib.std import *
 
-#DELTA_T = 0.1
+DELTA_T = 0.1
 
 class OscillatorWithIntegrators(CBD):
     def __init__(self, block_name):
@@ -29,14 +29,14 @@ class OscillatorWithIntegrators(CBD):
         self.addConnection("prod", "int1", output_port_name='OUT1', input_port_name='IN1')
 
 
-# if __name__ == '__main__':
-#     from CBD.converters.latexify import CBD2Latex
-#     model = OscillatorWithIntegrators("SinGen")
-#     cbd2latex = CBD2Latex(model, show_steps=True, render_latex=False)
-#     cbd2latex.simplify_links()
-#     cbd2latex.substitute()
-#     cbd2latex.substitute()
-#     cbd2latex.substitute()
-#     #cbd2latex.simplify()
-#     print("RESULT IS:")
-#     print(cbd2latex.render())
+if __name__ == '__main__':
+    from CBD.converters.latexify import CBD2Latex
+    model = OscillatorWithIntegrators("SinGen")
+    cbd2latex = CBD2Latex(model, show_steps=True, render_latex=False)
+    cbd2latex.simplify_links()
+    cbd2latex.substitute()
+    cbd2latex.substitute()
+    cbd2latex.substitute()
+    #cbd2latex.simplify()
+    print("RESULT IS:")
+    print(cbd2latex.render())

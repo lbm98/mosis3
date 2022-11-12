@@ -12,7 +12,7 @@ cbd = ErrorB("ErrorB")
 # Run the Simulation
 sim = Simulator(cbd)
 sim.setDeltaT(DELTA_T)
-sim.run(10)
+sim.run(50)
 
 # TODO: Process Your Simulation Results
 
